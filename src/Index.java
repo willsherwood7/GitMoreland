@@ -20,25 +20,25 @@ public class Index {
 	
 	public void initialize () {
 		
-		new File(".\\objects").mkdirs();
-		new File(".\\index");
+		new File(".\\objects").mkdirs(); //creates objects folder
+		new File(".\\index"); //creates index file
 		
 	}
 	
-	public void addBlob(String fileLoc) throws NoSuchAlgorithmException, IOException {
-		Blob blob = new Blob (fileLoc);
-		codes.put(fileLoc, blob.getSha());
-		printHashMap();
+	public void addBlob(String fileLoc) throws NoSuchAlgorithmException, IOException { //adds blob
+		Blob blob = new Blob (fileLoc); //creates new blob
+		codes.put(fileLoc, blob.getSha()); //adds blob to hashmap
+		printHashMap(); //updates hashmap
 	}
 	
-	public void deleteBlob(String fileLoc) throws IOException {
-		File myObj = new File(".\\objects\\" + codes.get(fileLoc)); 
-		myObj.delete();
+	public void deleteBlob(String fileLoc) throws IOException { //deletes blob
+		File myObj = new File(".\\objects\\" + codes.get(fileLoc)); //creates dummy file (overwriting existing file
+		myObj.delete(); //deletes it
 		codes.remove(fileLoc);
 		printHashMap();
 	}
 	
-	public void printHashMap() throws IOException {
+	public void printHashMap() throws IOException { //fixes index file based on current hashmap
 		Writer output;
 		output = new BufferedWriter(new FileWriter(".\\index"));  //clears file every time
 		for (String s: codes.keySet()) {

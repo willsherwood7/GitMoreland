@@ -22,11 +22,11 @@ public class Blob {
 //		new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath()).mkdirs();
 		
 		
-		Path fileOrigin = Paths.get(fileLoc);
-		String content = Files.readString(fileOrigin);
-		text = content;
+		Path fileOrigin = Paths.get(fileLoc); //finds path for desired file
+		String content = Files.readString(fileOrigin); //gets content of file
+		text = content; //sets private instance variable
 		
-		MessageDigest md = MessageDigest.getInstance("SHA-1");
+		MessageDigest md = MessageDigest.getInstance("SHA-1"); //generates sha1
 		byte[] messageDigest = md.digest(content.getBytes());
 		BigInteger no = new BigInteger(1, messageDigest);
 		String hashtext = no.toString(16);
@@ -37,9 +37,9 @@ public class Blob {
 		
 		
 		
-		Path p = Paths.get(".\\objects\\" + hashtext);
+		Path p = Paths.get(".\\objects\\" + hashtext); //creates path with hashtext as name in objects folder
         try {
-            Files.writeString(p, content, StandardCharsets.ISO_8859_1);
+            Files.writeString(p, content, StandardCharsets.ISO_8859_1); //creates file
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
