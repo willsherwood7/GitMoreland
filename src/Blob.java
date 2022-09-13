@@ -35,13 +35,18 @@ public class Blob {
         }
 		sha1 = hashtext;
 		
+		Path p = null;
+		if (System.getProperty("os.name").equals("Windows 10")) {
+			p = Paths.get(".\\objects\\" + hashtext + ".txt"); //creates path with hashtext as name in objects folder
+		} else {
+			//if not windows assumed to be unix based system
+			p = Paths.get("./objects/" + hashtext + ".txt");
+		}
 		
 		
-		Path p = Paths.get(".\\objects\\" + hashtext); //creates path with hashtext as name in objects folder
         try {
             Files.writeString(p, content, StandardCharsets.ISO_8859_1); //creates file
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 	}

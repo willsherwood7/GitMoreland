@@ -21,11 +21,14 @@ public class GitTester {
 //			e.printStackTrace();
 //		}
 		
+		
 		Index index = new Index();
 		index.initialize();
-		index.addBlob("testext");
-		index.addBlob("text2");
-		index.deleteBlob("testext");
+		index.addBlob("text1.txt");
+		index.addBlob("text2.txt");
+		index.deleteBlob("text1.txt");
+		
+		System.out.print(System.getProperty("os.name"));
 		
 	}
 	
