@@ -11,7 +11,7 @@ import javax.swing.filechooser.FileSystemView;
 
 public class GitTester {
 
-	public static void main (String[]args) throws NoSuchAlgorithmException, IOException {
+	public static void main (String [] args) throws NoSuchAlgorithmException, IOException {
 //		System.out.println(FileSystemView.getFileSystemView().getDefaultDirectory().getPath());
 //		new File(FileSystemView.getFileSystemView().getDefaultDirectory().getPath()+"\\objects").mkdirs();
 //		Path p = Paths.get(FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\text232.txt");
