@@ -23,10 +23,10 @@ public class GitTester {
 		
 		
 		Index index = new Index();
-		index.initialize();
+		//index.initialize();
 		index.addBlob("text1.txt");
 		index.addBlob("text2.txt");
-		index.deleteBlob("text1.txt");
+		//index.deleteBlob("text1.txt");
 		
 		System.out.print(System.getProperty("os.name"));
 		

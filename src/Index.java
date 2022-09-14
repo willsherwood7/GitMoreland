@@ -12,44 +12,60 @@ import javax.swing.filechooser.FileSystemView;
 
 public class Index {
 	
-	private HashMap<String,String> codes;
+	private HashMap<String, String> codes;
 
 	public Index () {
-		
-		codes = new HashMap<String,String>();
-		
+		codes = new HashMap<String, String>();
+		initialize();
 	}
 	
-	
+	//creates objects and index.txt file
 	public void initialize () {
 		
-		if (System.getProperty("os.name").equals("Windows 10")) {
-			new File(".\\objects").mkdirs(); //creates objects folder
-			new File(".\\index.txt"); //creates index file
-		} else {
-			//if not windows assumed to be unix based system
-			new File("./objects").mkdirs(); //creates objects folder
-			new File("./index.txt"); //creates index file
-		}
+		new File("objects").mkdirs();
+		new File("index.txt");
 		
+		/*
+		switch (System.getProperty("os.name")) {
+			case "Windows 10":
+				new File(".\\objects").mkdirs();
+				new File(".\\index.txt");
+				break;
+			case "Mac OS X":
+				new File("./objects").mkdirs(); 
+				new File("./index.txt");
+				break;
+			default:
+				//should work for all UNIX systems but still have set up to easily implement
+				new File("./objects").mkdirs();
+				new File("./index.txt");
+		}
+		*/
 	}
 	
 	public void addBlob(String fileLoc) throws NoSuchAlgorithmException, IOException { //adds blob
 		Blob blob = new Blob (fileLoc); //creates new blob
-		codes.put(fileLoc, blob.getSha()); //adds blob to hashmap
-		printHashMap(); //updates hashmap
+		codes.put(fileLoc, blob.getSha()); //adds blob to hash map
+		printHashMap(); //updates index file
 	}
 	
 	public void deleteBlob(String fileLoc) throws IOException { //deletes blob
+		//overwrites file with dummy file to be deleted
+		File myObj =  new File("./objects/" + codes.get(fileLoc) + ".txt");
 		
-		File myObj = null;
-		
-		if (System.getProperty("os.name").equals("Windows 10")) {
-			myObj =  new File(".\\objects\\" + codes.get(fileLoc) + ".txt"); //creates dummy file (overwriting existing file
-		} else {
-			//if not windows assumed to be unix based system
-			myObj =  new File("./objects/" + codes.get(fileLoc) + ".txt"); //creates dummy file (overwriting existing file
+		/*
+		switch (System.getProperty("os.name")) {
+		case "Windows 10":
+			myObj =  new File(".\\objects\\" + codes.get(fileLoc) + ".txt");
+			break;
+		case "Mac OS X":
+			myObj =  new File("./objects/" + codes.get(fileLoc) + ".txt");
+			break;
+		default:
+			//should work for all UNIX systems but still have set up to easily implement
+			myObj =  new File("./objects/" + codes.get(fileLoc) + ".txt");
 		}
+		*/
 
 		myObj.delete(); //deletes it
 		codes.remove(fileLoc);
@@ -57,15 +73,21 @@ public class Index {
 	}
 	
 	public void printHashMap() throws IOException { //fixes index file based on current hashmap
-		Writer output = null;
+		Writer output = new BufferedWriter(new FileWriter("index.txt"));;
 		
-		if (System.getProperty("os.name").equals("Windows 10")) {
-			output = new BufferedWriter(new FileWriter(".\\index.txt"));  //clears file every time
-		} else {
-			//if not windows assumed to be unix based system
-			output = new BufferedWriter(new FileWriter("./index.txt"));  //clears file every time
+		/*
+		switch (System.getProperty("os.name")) {
+		case "Windows 10":
+			output = new BufferedWriter(new FileWriter(".\\index.txt"));
+			break;
+		case "Mac OS X":
+			output = new BufferedWriter(new FileWriter("./index.txt"));
+			break;
+		default:
+			//should work for all UNIX systems but still have set up to easily implement
+			output = new BufferedWriter(new FileWriter("./index.txt"));
 		}
-		
+		*/
 		
 		for (String s: codes.keySet()) {
 			output.append(s + " : " + codes.get(s) + "\n");
@@ -73,4 +95,8 @@ public class Index {
 		output.close();
 	}
 	
+	public void delete() {
+		new File("objects").delete();
+		new File("index.txt").delete();
+	}
 }
