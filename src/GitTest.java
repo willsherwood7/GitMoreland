@@ -13,11 +13,10 @@ class IndexTest {
 	public static String filePath = "test.txt";
 	public static String testerText = "tester text that is great";
 	
-	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		//create file
-		Files.write(Paths.get(filePath), testerText.getBytes());
+		Files.writeString(Paths.get(filePath), testerText);
 
 	}
 
@@ -82,6 +81,5 @@ class IndexTest {
 		b.delete();
 		
 	}
-	
 
 }

@@ -45,7 +45,8 @@ public class Blob {
 		*/
 		
         try {
-            Files.writeString(p, content, StandardCharsets.ISO_8859_1); //creates file
+            //Files.writeString(p, content, StandardCharsets.ISO_8859_1); //creates file
+            Files.writeString(p, content);
         } catch (IOException e) {
             e.printStackTrace();
         }
