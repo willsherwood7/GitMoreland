@@ -8,7 +8,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class GitTester {
+class IndexTest {
 
 	public static String filePath = "test.txt";
 	public static String testerText = "tester text that is great";
@@ -35,10 +35,27 @@ class GitTester {
 		
 		assertTrue(a != null);
 		
+		a.delete();
+	}
+
+	@Test
+	void testGetBlob() {
+		Blob a = null;
+		try { a = new Blob(filePath); }
+		catch (Exception e) {e.printStackTrace();}
+		
 		assertTrue(testerText.equals(a.getText()));
 		
-		assertTrue("068f7350ecf50f6598bf98251a9c0cedfdf3ecde".equals(a.getSha()));
+		a.delete();
+	}
+	
+	@Test
+	void testGetSha() {
+		Blob a = null;
+		try { a = new Blob(filePath); }
+		catch (Exception e) {e.printStackTrace();}
 		
+		assertTrue("068f7350ecf50f6598bf98251a9c0cedfdf3ecde".equals(a.getSha()));
 		
 		a.delete();
 	}
@@ -46,10 +63,15 @@ class GitTester {
 	@Test
 	void makeIndex() {
 		Index b = new Index();
+		assertTrue(new File("objects").exists());
+		b.delete();
+	}
+	
+	@Test
+	void IndexAddAndRemove() {
+		Index b = new Index();
 		try { b.addBlob(filePath); }
 		catch (Exception e) {e.printStackTrace();}
-		
-		assertTrue(new File("objects").exists());
 		
 		assertTrue(new File("objects/068f7350ecf50f6598bf98251a9c0cedfdf3ecde.txt").exists());
 		
@@ -57,19 +79,7 @@ class GitTester {
 		catch (Exception e) {e.printStackTrace();}
 		
 		b.delete();
-	}
-	
-	@Test
-	void TreeTest() {
-		String[] l = new String[]{"blob : aoufbaobao", "blob : aofbaofbao", "tree : aoufgboab", "blob : aougvbaouvba"};
 		
-		new TreeObject(l);
-		
-		File temp = new File("e5aeac8a5923f243705c42443a9b43afb12cceb3");
-		
-		assertTrue(temp.exists());
-		
-		temp.delete();
 	}
 
 }
