@@ -41,7 +41,7 @@ public class Commit {
 	}
 	
 	public String getContents() {
-		return "" + "\n" + ptree + "\n" + parent + "\n" + child + "\n" + author + "\n" + date + "\n" + summary;
+		return "" + ptree + "\n" + parent + "\n" + child + "\n" + author + "\n" + date + "\n" + summary;
 
 	}
 	
