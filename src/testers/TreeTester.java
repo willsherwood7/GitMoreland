@@ -1,3 +1,4 @@
+package testers;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,7 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TreeTesterTest {
+import git.TreeObject;
+
+public class TreeTester{
 
 	private TreeObject tree;
 	
